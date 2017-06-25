@@ -1,24 +1,28 @@
-# Wordclock with neopixels
+Wordclock with neopixels
+=========================
 
 This is a project to construct and build a word clock using a raspberry pi zero and the adafruid neopixels.
 This project is currently in progress. The repository will document the current work.
 
-#Parts list
+Parts list
+==========
 
 - [Raspberry Pi Zero (W)](https://www.raspberrypi.org/blog/raspberry-pi-zero-w-joins-family/)
 - [XP Power ECE60US05](https://www.digikey.de/product-detail/de/xp-power/ECE60US05/1470-2590-ND/4809060) AC/DC converter 5V 60W
 - [74AHCT125](https://www.adafruit.com/product/1787) Level Converter
 - [Adafruit NeoPixel Digital RGBW](https://www.adafruit.com/product/2837) LED Strip
 
-#Wireing the PI
+Wireing the PI
+===============
 
 The wiring is done how it is explained in the [adafruit guide](https://learn.adafruit.com/neopixels-on-raspberry-pi/wiring#level-converter-chip-wiring)
 This is my result for the demo:
 
-![Image of wiring the PI](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI1.jpg)
-![Image of wiring the stripe](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI2.jpg)
+![Image of wiring the PI](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI1.jpg | width=100)
+![Image of wiring the stripe](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI2.jpg | width=100)
 
-#Setting up the PI
+Setting up the PI
+=================
 
 1. Setup an evironment where the pi is accessible through ssh. There are several [guides](https://davidmaitland.me/2015/12/raspberry-pi-zero-headless-setup/) on the web that
 explain how to setup the pi.
