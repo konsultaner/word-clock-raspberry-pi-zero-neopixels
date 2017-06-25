@@ -18,8 +18,8 @@ Wireing the PI
 The wiring is done how it is explained in the [adafruit guide](https://learn.adafruit.com/neopixels-on-raspberry-pi/wiring#level-converter-chip-wiring)
 This is my result for the demo:
 
-![Image of wiring the PI](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI1.jpg | width=100)
-![Image of wiring the stripe](https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI2.jpg | width=100)
+<img src="https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI1.jpg" width="300px" />
+<img src="https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/wirePI2.jpg" width="300px" />
 
 Setting up the PI
 =================
