@@ -11,7 +11,7 @@ import com.sun.jna.PointerType;
  * For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> , <a href="http://rococoa.dev.java.net/">Rococoa</a>, or <a href="http://jna.dev.java.net/">JNA</a>.
  */
 public interface RpiWs281xLibrary extends Library {
-    String JNA_LIBRARY_PATH = "/usr/local/bin/libws2811.a";
+    String JNA_LIBRARY_PATH = "/usr/local/bin/libws2811.so";
     NativeLibrary JNA_NATIVE_LIB = NativeLibrary.getInstance(RpiWs281xLibrary.JNA_LIBRARY_PATH);
     RpiWs281xLibrary INSTANCE = (RpiWs281xLibrary)Native.loadLibrary(RpiWs281xLibrary.JNA_LIBRARY_PATH, RpiWs281xLibrary.class);
     /** enum values */

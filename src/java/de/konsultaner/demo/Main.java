@@ -14,7 +14,8 @@ public class Main {
                 .setDimention(100,1)
                 .setGpoiNumber(18)
                 .add()
-                .buildChannel1().add()
+                .buildChannel1()
+                .add()
                 .instance();
 
             pixelHandler.initalize();

@@ -51,6 +51,7 @@ To make the raspi ouput the signal to the GPIO 18 and 13, we need to digitally w
     3. `nano main.c` Change the strip height to `1` and the width to something like `100` and set the `STRIP_TYPE` to `SK6812_STRIP_RGBW`
     4. `scons` this runs the compiler
     5. `sudo ./test` you should see a running led snake
+    5. `scons ws2811_slib` to compile the so file and copy `libws2811.so` to `/usr/local/bin/libws2811.so`
     
 4. If the test was successful add the java wrapper to code the clock
     1. `sudo cp ~/rpi_ws281x/libws2811.a /usr/local/bin/`
