@@ -52,4 +52,7 @@ To make the raspi ouput the signal to the GPIO 18 and 13, we need to digitally w
     4. `scons` this runs the compiler
     5. `sudo ./test` you should see a running led snake
     
+4. If the test was successful add the java wrapper to code the clock
+    1. `sudo cp ~/rpi_ws281x/libws2811.a /usr/local/bin/`
+    
            
