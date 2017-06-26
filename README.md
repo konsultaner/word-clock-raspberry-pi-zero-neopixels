@@ -48,7 +48,7 @@ To make the raspi ouput the signal to the GPIO 18 and 13, we need to digitally w
     1. `sudo apt-get install scons`
     2. `https://github.com/jgarff/rpi_ws281x`
     3. `cd rpi_ws281x`
-    3. `nano main.c` Change the strip height to `0` and the width to something like `100` and set the `STRIP_TYPE` to `SK6812_STRIP_RGBW`
+    3. `nano main.c` Change the strip height to `1` and the width to something like `100` and set the `STRIP_TYPE` to `SK6812_STRIP_RGBW`
     4. `scons` this runs the compiler
     5. `sudo ./test` you should see a running led snake
     
