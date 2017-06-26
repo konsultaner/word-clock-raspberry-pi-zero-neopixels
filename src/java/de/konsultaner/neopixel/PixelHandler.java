@@ -48,7 +48,6 @@ public final class PixelHandler {
     
     public void cleanup(){
         RpiWs281xLibrary.INSTANCE.ws2811_fini(this.matrix);
-        
     }
     
     public static Builder getBuilder(){

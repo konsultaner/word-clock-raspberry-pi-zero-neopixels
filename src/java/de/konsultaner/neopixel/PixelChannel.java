@@ -22,6 +22,16 @@ public final class PixelChannel {
         this.currentState[x][y] = pixel;
     }
     
+    public void rightShiftPixelsRow(int row){
+        for (int i = 0; i < this.currentState.length; i++) {
+            if(i < this.currentState.length-1){
+                this.currentState[i+1][row] = this.currentState[i][row];
+            }else {
+                this.currentState[0][row] = this.currentState[i][row];
+            }
+        }
+    }
+    
     void pushPixels(){
         for (int i = 0; i < this.currentState.length; i++) {
             for (int i1 = 0; i1 < this.currentState[i].length; i1++) {
@@ -30,6 +40,10 @@ public final class PixelChannel {
         }
     }
 
+    public int getLedCount() {
+        return this.rawChannel.count;
+    }
+    
     public ws2811_channel_t getRawChannel() {
         return rawChannel;
     }
@@ -37,7 +51,7 @@ public final class PixelChannel {
     public static Builder getBuilder(PixelHandler.Builder builder, int channelIndex){
         return new Builder(builder, channelIndex);
     }
-    
+
     public static class Builder{
         private final PixelHandler.Builder builder;
         private final int channelIndex;
