@@ -7,7 +7,11 @@ public class Pixel {
     public void setColor(int white, int red, int green, int blue){
         this.rawColor = (white << 24) | (red << 16)| (green << 8) | blue;
     }
-    
+
+    public int getRawColor() {
+        return rawColor;
+    }
+
     public void setWhite(int value){
         this.rawColor = (this.rawColor & 0x00FFFFFF) | (value << 24);
     }

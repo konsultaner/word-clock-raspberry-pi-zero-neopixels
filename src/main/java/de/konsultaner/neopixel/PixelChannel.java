@@ -23,13 +23,15 @@ public final class PixelChannel {
     }
     
     public void rightShiftPixelsRow(int row){
-        for (int i = 0; i < this.currentState.length; i++) {
+        setPixel(0,row,this.currentState[this.currentState.length-1][row]);
+        /*for (int i = 0; i < this.currentState.length -1; i++) {
             if(i < this.currentState.length-1){
-                this.currentState[i+1][row] = this.currentState[i][row];
-            }else {
-                this.currentState[0][row] = this.currentState[i][row];
+                setPixel(i+1,row,this.currentState[i][row]);
             }
-        }
+        }*/
+        setPixel(1,row,this.currentState[2][row]);
+        setPixel(2,row,this.currentState[3][row]);
+        setPixel(3,row,this.currentState[4][row]);
     }
     
     void pushPixels(){
@@ -50,7 +52,6 @@ public final class PixelChannel {
                 this.currentState[i][i1].setColor(0,0,0,0);
             }
         }
-        pushPixels();
     }
 
     public int getLedCount() {
