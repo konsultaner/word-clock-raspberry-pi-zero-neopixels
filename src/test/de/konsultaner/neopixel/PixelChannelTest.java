@@ -29,9 +29,7 @@ public class PixelChannelTest {
         assertThat("Should have 255 at pixels 0",pixelChannel.getPixel(9,0).rawColor, CoreMatchers.equalTo(0x19191919));
 
         pixelChannel.rightShiftPixelsRow(0);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Integer.toHexString(pixelChannel.getPixel(i,0).rawColor));
-        }
+        
         assertThat("Should have 255 at pixels 0",pixelChannel.getPixel(0,0).rawColor, CoreMatchers.equalTo(0x19191919));
         assertThat("Should have 255 at pixels 0",pixelChannel.getPixel(9,0).rawColor, CoreMatchers.equalTo(0x33333333));
     }
