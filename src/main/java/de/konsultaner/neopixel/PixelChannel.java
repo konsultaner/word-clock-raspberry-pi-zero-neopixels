@@ -22,16 +22,16 @@ public final class PixelChannel {
         this.currentState[x][y] = pixel;
     }
     
+    public Pixel getPixel(int x, int y){
+        return this.currentState[x][y];
+    }
+    
     public void rightShiftPixelsRow(int row){
-        setPixel(0,row,this.currentState[this.currentState.length-1][row]);
-        /*for (int i = 0; i < this.currentState.length -1; i++) {
-            if(i < this.currentState.length-1){
-                setPixel(i+1,row,this.currentState[i][row]);
-            }
-        }*/
-        setPixel(1,row,this.currentState[2][row]);
-        setPixel(2,row,this.currentState[3][row]);
-        setPixel(3,row,this.currentState[4][row]);
+        Pixel newFirst = this.currentState[this.currentState.length-1][row];
+        for (int i = this.currentState.length - 1; i > 0; i--) {
+            setPixel(i,row,this.currentState[i-1][row]);
+        }
+        setPixel(0,row,newFirst);
     }
     
     void pushPixels(){
