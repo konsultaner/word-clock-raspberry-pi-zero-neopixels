@@ -4,8 +4,6 @@ import rpi.ws281x.RpiWs281xLibrary;
 import rpi.ws281x.ws2811_channel_t;
 import rpi.ws281x.ws2811_t;
 
-import java.security.interfaces.RSAPrivateCrtKey;
-
 public final class PixelHandler {
     
     private static final int PIXEL_CHANNEL_COUNT = 2;

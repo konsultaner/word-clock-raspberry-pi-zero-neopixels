@@ -28,14 +28,17 @@ public class Main {
                 int red = calculateColorValue(i,rampLength);
                 int green = calculateColorValue((i-rampLength)%ledSize,rampLength);
                 int blue = calculateColorValue((i-(rampLength*2))%ledSize,rampLength);
-                pixelHandler.getPixelChannel(0).setPixel(0, 0, Pixel.fromColor(white, red, green, blue));
+                pixelHandler.getPixelChannel(0).setPixel(i, 0, Pixel.fromColor(white, red, green, blue));
             }
             
             for (int i = 0; i < ledSize; i++) {
-                pixelHandler.getPixelChannel(0).rightShiftPixelsRow(0);
                 pixelHandler.render();
+                pixelHandler.getPixelChannel(0).rightShiftPixelsRow(0);
+                Thread.sleep(1000/15);
             }
-            
+            pixelHandler.getPixelChannel(0).clearChannel();
+            pixelHandler.render();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -10,6 +10,8 @@
 
     <name>${project.artifactId}-${project.version}</name>
     
+    
+    
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
