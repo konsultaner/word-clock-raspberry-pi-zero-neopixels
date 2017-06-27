@@ -2,6 +2,7 @@ package de.konsultaner.demo;
 
 import de.konsultaner.neopixel.Pixel;
 import de.konsultaner.neopixel.PixelHandler;
+import rpi.ws281x.RpiWs281xLibrary;
 
 public class Main {
 
@@ -11,6 +12,7 @@ public class Main {
             pixelHandler = PixelHandler
                 .getBuilder()
                 .buildChannel0()
+                .setLedTyp(RpiWs281xLibrary.SK6812_STRIP_RGBW)
                 .setDimention(100,1)
                 .setGpoiNumber(18)
                 .add()
@@ -28,9 +30,9 @@ public class Main {
                 int red = calculateColorValue(i,rampLength);
                 int green = calculateColorValue((i-rampLength)%ledSize,rampLength);
                 int blue = calculateColorValue((i-(rampLength*2))%ledSize,rampLength);
-                pixelHandler.getPixelChannel(0).setPixel(i, 0, Pixel.fromColor(white, red, green, blue));
+                pixelHandler.getPixelChannel(0).setPixel(i, 0, Pixel.fromColor(white,red,green,blue));
             }
-            
+
             for (int i = 0; i < ledSize; i++) {
                 pixelHandler.render();
                 pixelHandler.getPixelChannel(0).rightShiftPixelsRow(0);
@@ -47,13 +49,12 @@ public class Main {
             }
         }
     }
-    
-    private static int calculateColorValue(int ledIndex, int rampLength){
-        int colorValue = ledIndex/rampLength * 255;
+
+    private static int calculateColorValue(float ledIndex, int rampLength){
+        float colorValue = ledIndex/rampLength * 255;
         if(colorValue > 255){
             colorValue = Math.max(0,255-colorValue);
         }
-        return colorValue;
+        return (int)colorValue;
     }
-
 }

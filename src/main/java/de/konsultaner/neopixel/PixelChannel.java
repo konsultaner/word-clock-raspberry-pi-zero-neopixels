@@ -33,20 +33,24 @@ public final class PixelChannel {
     }
     
     void pushPixels(){
+        int[] pointerValues = new int[rawChannel.count];
+        
         for (int i = 0; i < this.currentState.length; i++) {
             for (int i1 = 0; i1 < this.currentState[i].length; i1++) {
-                this.rawChannel.leds.getPointer().setLong(i + (this.currentState.length * i1),this.currentState[i][i1].rawColor);
+                pointerValues[i + (this.currentState.length * i1)] = this.currentState[i][i1].rawColor;
             }
         }
+
+        this.rawChannel.leds.getPointer().write(0,pointerValues,0,pointerValues.length);
     }
     
     public void clearChannel(){
         for (int i = 0; i < this.currentState.length; i++) {
             for (int i1 = 0; i1 < this.currentState[i].length; i1++) {
                 this.currentState[i][i1].setColor(0,0,0,0);
-                this.rawChannel.leds.getPointer().setLong(i + (this.currentState.length * i1),0);
             }
         }
+        pushPixels();
     }
 
     public int getLedCount() {
