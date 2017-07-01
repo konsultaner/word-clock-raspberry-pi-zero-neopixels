@@ -4,6 +4,8 @@ Wordclock with neopixels
 This is a project to construct and build a word clock using a raspberry pi zero and the adafruid neopixels.
 This project is currently in progress. The repository will document the current work.
 
+To use the the great library [rpi_ws291x](https://github.com/jgarff/rpi_ws281x) this project adds a Java-Wrapper.
+
 Parts list
 ==========
 
