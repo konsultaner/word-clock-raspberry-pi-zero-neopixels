@@ -1,4 +1,4 @@
-package de.konsultaner.wordclock;
+package de.konsultaner.wordClock;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Wordclock {
+public class WordClock {
     private final List<Interval> intervals = new ArrayList<>();
     public boolean addInterval(Interval interval){
         return this.intervals.add(interval);
