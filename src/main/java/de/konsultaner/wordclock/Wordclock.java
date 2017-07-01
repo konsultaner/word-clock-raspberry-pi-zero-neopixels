@@ -12,7 +12,7 @@ public class Wordclock {
         return this.intervals.add(interval);
     }
 
-    public List<Interval> getByDate(Date date){
+    public List<Interval> getIntervalsByDate(Date date){
         List<Interval> resultIntervals = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -21,15 +21,8 @@ public class Wordclock {
 
         for (int i = 0; i < intervals.size(); i++) {
             Interval interval = intervals.get(i);
-            if(interval.type == Interval.HOUR){
-                if(interval.from >= hour && hour <= interval.to){
-                    resultIntervals.add(interval);
-                }
-            }
-            if(interval.type == Interval.MINUTE){
-                if(interval.from >= minute && minute <= interval.to){
-                    resultIntervals.add(interval);
-                }
+            if(interval.fromHour <= hour && hour <= interval.toHour && interval.fromMinute <= minute && minute <= interval.toMinute){
+                resultIntervals.add(interval);
             }
         }
         return resultIntervals;
@@ -37,7 +30,7 @@ public class Wordclock {
     
     public int[][] getMatrixByDate(Date date){
         int[][] resultMatrix = new int[0][0];
-        List<Interval> intervals = getByDate(date);
+        List<Interval> intervals = getIntervalsByDate(date);
         for (int i = 0; i < intervals.size(); i++) {
             int[][] currentMatrix = intervals.get(i).matrix;
             if(resultMatrix.length < currentMatrix.length){
@@ -62,15 +55,17 @@ public class Wordclock {
         public static final int HOUR = Calendar.HOUR_OF_DAY;
         public static final int MINUTE = Calendar.MINUTE;
         
-        final int type;
-        final int from;
-        final int to;
+        final int fromHour;
+        final int toHour;
+        final int fromMinute;
+        final int toMinute;
         final int[][] matrix;
 
-        public Interval(int type, int from, int to, int[][] matrix) {
-            this.type = type;
-            this.from = from;
-            this.to = to;
+        public Interval(int fromHour, int toHour, int fromMinute, int toMinute, int[][] matrix) {
+            this.fromHour = fromHour;
+            this.toHour = toHour;
+            this.fromMinute = fromMinute;
+            this.toMinute = toMinute;
             this.matrix = matrix;
         }      
     }
