@@ -57,5 +57,8 @@ To make the raspi ouput the signal to the GPIO 18 and 13, we need to digitally w
     2. install java 8 `sudo apt-get install oracle-java8-jdk`
     3. execute `mv compile assembly:single` from inside the root of this repo and copy `out/build/ws2811.jar` to the raspi.
     4. run `java -cp ws2811.jar de.konsultaner.demo.Main`
+    5. Result:  
+       <img src="https://raw.githubusercontent.com/konsultaner/word-clock-raspberry-pi-zero-neopixels/master/img/demo.jpg" width="300px" />
+
     
            
