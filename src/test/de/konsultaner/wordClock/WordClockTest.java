@@ -21,17 +21,17 @@ public class WordClockTest {
         wordClock.addInterval(new WordClock.Interval(1,1, 0, 59, matrix1));
         
         int[][] matrix2 = new int[10][10];
-        matrix1[0][0] = 1;
-        matrix1[1][3] = 1;
-        matrix1[2][3] = 1;
-        matrix1[3][3] = 1;
+        matrix2[0][0] = 1;
+        matrix2[1][3] = 1;
+        matrix2[2][3] = 1;
+        matrix2[3][3] = 1;
         wordClock.addInterval(new WordClock.Interval(9,18, 0, 59, matrix2));
         
         int[][] matrix3 = new int[10][10];
-        matrix1[0][9] = 1;
-        matrix1[9][1] = 1;
-        matrix1[8][1] = 1;
-        matrix1[7][1] = 1;
+        matrix3[0][9] = 1;
+        matrix3[9][1] = 1;
+        matrix3[8][1] = 1;
+        matrix3[7][1] = 1;
         wordClock.addInterval(new WordClock.Interval(1,1, 0, 15, matrix3));
 
         Calendar calendar = Calendar.getInstance();
@@ -94,19 +94,51 @@ public class WordClockTest {
         matrix1[2][0] = 1;
         matrix1[3][0] = 1;
         wordClock.addInterval(new WordClock.Interval(1,1, 0, 59, matrix1));
+        
+        int[][] matrix = wordClock.getMatrixByDate(calendar.getTime());
+        
+        assertThat("Should have a 4x1 matrix equal to matrix 1",matrix.length,CoreMatchers.equalTo(4));
+        assertThat("Should have a 4x1 matrix equal to matrix 1",matrix[0].length,CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[0][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[1][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[2][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[3][0],CoreMatchers.equalTo(1));
 
         int[][] matrix2 = new int[4][4];
-        matrix1[0][0] = 1;
-        matrix1[1][3] = 1;
-        matrix1[2][3] = 1;
-        matrix1[3][3] = 1;
-        wordClock.addInterval(new WordClock.Interval(9,18, 0, 59, matrix2));
+        matrix2[0][0] = 0;
+        matrix2[1][3] = 1;
+        matrix2[2][3] = 1;
+        matrix2[3][3] = 1;
+        wordClock.addInterval(new WordClock.Interval(1,1, 0, 59, matrix2));
 
-        int[][] matrix3 = new int[10][10];
-        matrix1[0][9] = 1;
-        matrix1[9][1] = 1;
-        matrix1[8][1] = 1;
-        matrix1[7][1] = 1;
-        wordClock.addInterval(new WordClock.Interval(1,1, 0, 15, matrix3));
+        matrix = wordClock.getMatrixByDate(calendar.getTime());
+
+        assertThat("Should have a 4x4 matrix equal to matrix 2",matrix.length,CoreMatchers.equalTo(4));
+        assertThat("Should have a 4x4 matrix equal to matrix 2",matrix[0].length,CoreMatchers.equalTo(4));
+        assertThat("Should have the correct copied values",matrix[0][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[1][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[2][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[3][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[1][3],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[2][3],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[3][3],CoreMatchers.equalTo(1));
+
+
+        int[][] matrix3 = new int[5][4];
+        matrix3[4][0] = 1;
+        wordClock.addInterval(new WordClock.Interval(1,1, 0, 59, matrix3));
+
+        matrix = wordClock.getMatrixByDate(calendar.getTime());
+
+        assertThat("Should have a 4x4 matrix equal to matrix 2",matrix.length,CoreMatchers.equalTo(5));
+        assertThat("Should have a 4x4 matrix equal to matrix 2",matrix[0].length,CoreMatchers.equalTo(4));
+        assertThat("Should have the correct copied values",matrix[0][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[1][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[2][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[3][0],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[1][3],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[2][3],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[3][3],CoreMatchers.equalTo(1));
+        assertThat("Should have the correct copied values",matrix[4][0],CoreMatchers.equalTo(1));
     }
 }

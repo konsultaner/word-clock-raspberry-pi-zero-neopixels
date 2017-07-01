@@ -35,13 +35,14 @@ public class WordClock {
             int[][] currentMatrix = intervals.get(i).matrix;
             if(resultMatrix.length < currentMatrix.length){
                 int[][] enlargedResult = new int[currentMatrix.length][resultMatrix.length>0?resultMatrix[0].length:0];
-                java.lang.System.arraycopy(resultMatrix,0,enlargedResult,0,enlargedResult.length);
+                java.lang.System.arraycopy(resultMatrix,0,enlargedResult,0,resultMatrix.length);
                 resultMatrix = enlargedResult;
             }
             for (int j = 0; j < currentMatrix.length; j++) {
                 if(resultMatrix[j].length < currentMatrix[j].length){
                     int[] enlargedResult = new int[currentMatrix[j].length];
-                    java.lang.System.arraycopy(resultMatrix[j],0,enlargedResult,0,enlargedResult.length);
+                    java.lang.System.arraycopy(resultMatrix[j],0,enlargedResult,0,resultMatrix[j].length);
+                    resultMatrix[j] = enlargedResult;
                 }
                 for (int k = 0; k < currentMatrix[j].length; k++) {
                     resultMatrix[j][k] |=  currentMatrix[j][k];
