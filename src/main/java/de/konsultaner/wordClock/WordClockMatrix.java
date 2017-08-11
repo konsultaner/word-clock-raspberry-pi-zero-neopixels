@@ -38,4 +38,25 @@ public class WordClockMatrix {
         }
         return result;
     }
+    
+    public WordclockDecorator getWorclockDecorator(){
+        return new WordclockDecorator(this);
+    }
+    
+    public static final class WordclockDecorator{
+        private final WordClockMatrix matrix;
+        private WordClock wordClock = new WordClock();
+        private WordclockDecorator(WordClockMatrix matrix){
+            this.matrix = matrix;
+        }
+        public WordclockDecorator addSentence(int fromHour, int toHour, int fromMinute, int toMinute, String sentence){
+            wordClock.addInterval(new WordClock.Interval(fromHour, toHour, fromMinute, toMinute, matrix.getMatrixBySentence(sentence)));
+            return this;
+        }
+        public WordClock getWordClock() {
+            WordClock returnWordClock = wordClock;
+            wordClock = new WordClock();
+            return returnWordClock;
+        }
+    }
 }

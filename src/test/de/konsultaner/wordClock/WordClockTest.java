@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class WordClockTest {
-
+    
     @Test
     public void testGetIntervalsByDate() throws Exception {
         WordClock wordClock = new WordClock();
@@ -140,5 +140,69 @@ public class WordClockTest {
         assertThat("Should have the correct copied values",matrix[2][3],CoreMatchers.equalTo(1));
         assertThat("Should have the correct copied values",matrix[3][3],CoreMatchers.equalTo(1));
         assertThat("Should have the correct copied values",matrix[4][0],CoreMatchers.equalTo(1));
+    }
+
+    @Test
+    public void testGetFilteredClockMatrix() throws Exception {
+        String[] clockMatrix = new String[]{
+            "ESKISTLRMITTAGSIABENDS",
+            "FRÜHAMLFÜNFZEHNZWANZIG",
+            "DREIVIERTELTGNACHVORJM",
+            "HALBQZWÖLFPZWEINSIEBEN",
+            "KDREIRHFÜNFELFNEUNVIER",
+            "WACHTZEHNRSBSECHSFMUHR",
+            "AFMOLDIWMIRDOPFRLSAKSO"
+        };
+        WordClockMatrix wordClockMatrix = new WordClockMatrix(clockMatrix);
+        WordClock wordClock = wordClockMatrix.getWorclockDecorator()
+            .addSentence(13,13,0,4,"ES IST MITTAGS EIN UHR")
+            .addSentence(13,13,5,9,"ES IST MITTAGS FÜNF NACH EIN UHR")
+            .addSentence(13,13,10,14,"ES IST MITTAGS ZEHN NACH EIN UHR")
+            .getWordClock();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        
+        String[] filteredMatrix = wordClock.getFilteredClockMatrix(clockMatrix,calendar.getTime());
+        for (String row:filteredMatrix) {
+            System.out.println(row);
+        }
+        assertThat(filteredMatrix[0],CoreMatchers.equalTo("ES IST  MITTAGS       "));
+        assertThat(filteredMatrix[1],CoreMatchers.equalTo("                      "));
+        assertThat(filteredMatrix[2],CoreMatchers.equalTo("                      "));
+        assertThat(filteredMatrix[3],CoreMatchers.equalTo("             EIN      "));
+        assertThat(filteredMatrix[4],CoreMatchers.equalTo("                      "));
+        assertThat(filteredMatrix[5],CoreMatchers.equalTo("                   UHR"));
+        assertThat(filteredMatrix[6],CoreMatchers.equalTo("                      "));
+
+        calendar.set(Calendar.MINUTE,7);
+        filteredMatrix = wordClock.getFilteredClockMatrix(clockMatrix,calendar.getTime());
+        for (String row:filteredMatrix) {
+            System.out.println(row);
+        }
+
+        assertThat(filteredMatrix[0],CoreMatchers.equalTo("ES IST  MITTAGS       "));
+        assertThat(filteredMatrix[1],CoreMatchers.equalTo("       FÜNF           "));
+        assertThat(filteredMatrix[2],CoreMatchers.equalTo("             NACH     "));
+        assertThat(filteredMatrix[3],CoreMatchers.equalTo("             EIN      "));
+        assertThat(filteredMatrix[4],CoreMatchers.equalTo("                      "));
+        assertThat(filteredMatrix[5],CoreMatchers.equalTo("                   UHR"));
+        assertThat(filteredMatrix[6],CoreMatchers.equalTo("                      "));
+        
+        calendar.set(Calendar.MINUTE,10);
+        filteredMatrix = wordClock.getFilteredClockMatrix(clockMatrix,calendar.getTime());
+        for (String row:filteredMatrix) {
+            System.out.println(row);
+        }
+
+        assertThat(filteredMatrix[0],CoreMatchers.equalTo("ES IST  MITTAGS       "));
+        assertThat(filteredMatrix[1],CoreMatchers.equalTo("           ZEHN       "));
+        assertThat(filteredMatrix[2],CoreMatchers.equalTo("             NACH     "));
+        assertThat(filteredMatrix[3],CoreMatchers.equalTo("             EIN      "));
+        assertThat(filteredMatrix[4],CoreMatchers.equalTo("                      "));
+        assertThat(filteredMatrix[5],CoreMatchers.equalTo("                   UHR"));
+        assertThat(filteredMatrix[6],CoreMatchers.equalTo("                      "));
     }
 }

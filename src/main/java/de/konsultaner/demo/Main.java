@@ -25,7 +25,7 @@ public class Main {
             int whiteBlockLength = 10;
             int rampLength = (ledSize / 3);
             for (int i = 0; i < ledSize; i++) {
-                int white = i >= 0 && i < whiteBlockLength?255:0;
+                int white = i < whiteBlockLength ?255:0;
 
                 int red = calculateColorValue(i,rampLength);
                 int green = calculateColorValue(((((i-rampLength)%ledSize)+ledSize)%ledSize),rampLength);

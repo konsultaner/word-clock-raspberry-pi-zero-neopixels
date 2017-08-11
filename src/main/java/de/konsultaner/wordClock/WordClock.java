@@ -52,6 +52,18 @@ public class WordClock {
         return resultMatrix;
     }
     
+    public String[] getFilteredClockMatrix(String[] clockMatrix, Date date){
+        String[] filteredClockMatrix = new String[clockMatrix.length];
+        int[][] binaryMatrix = this.getMatrixByDate(date);
+        for (int i = 0; i < binaryMatrix.length; i++) {
+            for (int j = 0; j < binaryMatrix[i].length && i < clockMatrix[i].length(); j++) {
+                if(filteredClockMatrix[i] == null) filteredClockMatrix[i] = "";
+                filteredClockMatrix[i] += binaryMatrix[i][j] == 0?" ":clockMatrix[i].charAt(j);
+            }
+        }
+        return filteredClockMatrix;
+    }
+    
     public static class Interval{
         public static final int HOUR = Calendar.HOUR_OF_DAY;
         public static final int MINUTE = Calendar.MINUTE;
