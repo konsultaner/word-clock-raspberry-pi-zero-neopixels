@@ -1,5 +1,6 @@
 package de.konsultaner.tetris;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Tetris {
@@ -48,9 +49,39 @@ public class Tetris {
      * @return An array of rows that have been cleared out, rows are marked with 1
      */
     int[][] clearFullRows(){
-        int[][] clearedRows = new int[matrixHeight][matrixWidth];
+        int[][] field = getCurrentFieldMatrix();
+        int[] clearRows = new int[field.length];
+        int[] clearColumns = new int[field.length>0?field[0].length:0];
+        int[][] resultMatrix = new int[clearRows.length][clearColumns.length];
+        Arrays.fill(clearRows, 1);
+        Arrays.fill(clearColumns, 1);
         
-        return clearedRows;
+        for (int rowIndex = 0; rowIndex < field.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < field[rowIndex].length; columnIndex++) {
+                if(gravity == GRAVITY.BOTTOM || gravity == GRAVITY.TOP) {
+                    clearRows[rowIndex] |= field[rowIndex][columnIndex];
+                    clearColumns[columnIndex] = 0;
+                }else{
+                    clearRows[rowIndex] = 0;
+                    clearColumns[columnIndex] |= field[rowIndex][columnIndex];
+                }
+            }
+        }
+        
+        // clear out brick
+        for (Brick brick: bricks ) {
+            brick.clearRows(clearRows);
+            brick.clearColumns(clearColumns);
+        }
+        
+        // generate result matrix        
+        for (int rowIndex = 0; rowIndex < resultMatrix.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < resultMatrix[rowIndex].length; columnIndex++) {
+                resultMatrix[rowIndex][columnIndex] = clearRows[rowIndex] | clearColumns[columnIndex];
+            }
+        }
+                
+        return resultMatrix;
     }
 
     public int[][] getCurrentFieldMatrix(){
@@ -118,7 +149,7 @@ public class Tetris {
     public class Brick implements Cloneable{
         int x,y;
         int red,green,blue,white;
-        final int[][] matrix;
+        private int[][] matrix;
 
         public Brick(int[][] matrix) {
             this.matrix = matrix;
@@ -148,6 +179,35 @@ public class Tetris {
         }
         
         void rotateCCW(){
+            
+        }
+
+        public void clearRows(int[] clearRows) {
+            int[][] newMatrix = new int[0][0];
+            int clearedRows = 0;
+            for (int i = 0; i < clearRows.length; i++) {
+                if(clearRows[i] == 0){
+                    int rowIndex = i - y;
+                    if(rowIndex > 0 && rowIndex < matrix.length){
+                        if(newMatrix.length > 0){
+                            newMatrix = Arrays.copyOf(newMatrix,newMatrix.length+1);
+                        }else{
+                            newMatrix = new int[1][matrix[rowIndex].length];
+                        }
+                        newMatrix[newMatrix.length-1] = Arrays.copyOf(matrix[rowIndex],matrix[rowIndex].length);
+                    }
+                }else clearedRows++;
+            }
+            matrix = newMatrix;
+            if(gravity == GRAVITY.BOTTOM){
+                y+=clearedRows;
+            }
+            if(gravity == GRAVITY.TOP){
+                y-=clearedRows;
+            }
+        }
+
+        public void clearColumns(int[] clearColumns) {
             
         }
     }
