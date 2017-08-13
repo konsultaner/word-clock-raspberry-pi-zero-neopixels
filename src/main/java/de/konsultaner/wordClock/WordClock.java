@@ -52,6 +52,16 @@ public class WordClock {
         return resultMatrix;
     }
     
+    public static int[][] concatMatrix(int[][] matrixA, int[][] matrixB){
+        int[][] resultMatrix = new int[Math.max(matrixA.length,matrixB.length)][Math.max(matrixA.length>0?matrixA[0].length:0,matrixB.length>0?matrixB[0].length:0)];
+        for (int i = 0; i < resultMatrix.length; i++) {
+            for (int j = 0; j < resultMatrix[0].length; j++) {
+                resultMatrix[i][j] = (matrixA.length > i&&matrixA[i].length>j?matrixA[i][j]:0) | (matrixB.length > i&&matrixB[i].length>j?matrixB[i][j]:0);
+            }
+        }
+        return resultMatrix;
+    }
+    
     public String[] getFilteredClockMatrix(String[] clockMatrix, Date date){
         String[] filteredClockMatrix = new String[clockMatrix.length];
         int[][] binaryMatrix = this.getMatrixByDate(date);

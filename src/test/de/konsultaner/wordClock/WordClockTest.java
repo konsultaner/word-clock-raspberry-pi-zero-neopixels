@@ -1,6 +1,7 @@
 package de.konsultaner.wordClock;
 
 import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -9,7 +10,35 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class WordClockTest {
-    
+    @Test
+    public void testConcatMatrix() throws Exception {
+        int[][] matrixA = new int[][]{
+            {1,0,1},{0,1,0},{1,0,0}
+        };
+        int[][] matrixB = new int[][]{
+            {1,1,0,0},{0,1,0,0},{1,1,1,1}
+        };
+        
+        int[][]result = WordClock.concatMatrix(matrixA,matrixB);
+        assertThat("Should have concatenated correctly",result.length,CoreMatchers.equalTo(3));
+        assertThat("Should have concatenated correctly",result[0].length,CoreMatchers.equalTo(4));
+        
+        assertThat("Should have concatenated correctly",result[0][0],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[0][1],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[0][2],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[0][3],CoreMatchers.equalTo(0));
+        
+        assertThat("Should have concatenated correctly",result[1][0],CoreMatchers.equalTo(0));
+        assertThat("Should have concatenated correctly",result[1][1],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[1][2],CoreMatchers.equalTo(0));
+        assertThat("Should have concatenated correctly",result[1][3],CoreMatchers.equalTo(0));
+        
+        assertThat("Should have concatenated correctly",result[2][0],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[2][1],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[2][2],CoreMatchers.equalTo(1));
+        assertThat("Should have concatenated correctly",result[2][3],CoreMatchers.equalTo(1));
+    }
+
     @Test
     public void testGetIntervalsByDate() throws Exception {
         WordClock wordClock = new WordClock();
