@@ -70,8 +70,8 @@ public class Tetris {
         
         // clear out brick
         for (Brick brick: bricks ) {
-            brick.clearRows(clearRows);
-            brick.clearColumns(clearColumns);
+            brick.clearRows(clearRows,gravity);
+            brick.clearColumns(clearColumns,gravity);
         }
         
         // generate result matrix        
@@ -146,13 +146,17 @@ public class Tetris {
         return true;
     }
     
-    public class Brick implements Cloneable{
+    public static class Brick implements Cloneable{
         int x,y;
         int red,green,blue,white;
         private int[][] matrix;
 
         public Brick(int[][] matrix) {
             this.matrix = matrix;
+        }
+
+        public int[][] getMatrix() {
+            return matrix;
         }
 
         protected Brick copy(){
@@ -182,32 +186,38 @@ public class Tetris {
             
         }
 
-        public void clearRows(int[] clearRows) {
+        public void clearRows(int[] clearRows, GRAVITY gravity) {
             int[][] newMatrix = new int[0][0];
             int clearedRows = 0;
             for (int i = 0; i < clearRows.length; i++) {
-                if(clearRows[i] == 0){
-                    int rowIndex = i - y;
-                    if(rowIndex > 0 && rowIndex < matrix.length){
-                        if(newMatrix.length > 0){
-                            newMatrix = Arrays.copyOf(newMatrix,newMatrix.length+1);
-                        }else{
+                int rowIndex = i - y;
+                if (clearRows[i] == 0) {
+                    if (rowIndex >= 0 && rowIndex < matrix.length) {
+                        if (newMatrix.length > 0) {
+                            newMatrix = Arrays.copyOf(newMatrix, newMatrix.length + 1);
+                        } else {
                             newMatrix = new int[1][matrix[rowIndex].length];
                         }
-                        newMatrix[newMatrix.length-1] = Arrays.copyOf(matrix[rowIndex],matrix[rowIndex].length);
+                        newMatrix[newMatrix.length - 1] = Arrays.copyOf(matrix[rowIndex], matrix[rowIndex].length);
                     }
-                }else clearedRows++;
+                } else {
+                    if ((rowIndex >= 0 && gravity == GRAVITY.BOTTOM) || (rowIndex < matrix.length && gravity == GRAVITY.TOP)){
+                        clearedRows++;
+                    }
+                }
             }
-            matrix = newMatrix;
-            if(gravity == GRAVITY.BOTTOM){
-                y+=clearedRows;
-            }
-            if(gravity == GRAVITY.TOP){
-                y-=clearedRows;
+            if(clearedRows > 0) {
+                matrix = newMatrix;
+                if (gravity == GRAVITY.BOTTOM) {
+                    y += clearedRows;
+                }
+                if (gravity == GRAVITY.TOP) {
+                    y -= clearedRows;
+                }
             }
         }
 
-        public void clearColumns(int[] clearColumns) {
+        public void clearColumns(int[] clearColumns, GRAVITY gravity) {
             
         }
     }
